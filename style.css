@@ -1,0 +1,179 @@
+/* 1. The STAR (*) means "apply this to EVERY element on the page" */
+* {
+    margin: 0;      /* Remove default spacing */
+    padding: 0;     /* Remove default padding */
+    box-sizing: border-box; /* Makes sizing easier to manage */
+}
+
+/* 2. Style the BODY (the background and font of the whole page) */
+body {
+    /* A gradient background that goes from dark blue to purple */
+    background: linear-gradient(135deg, #257de2, #f2884b);
+    
+    /* Make the text color white */
+    color: white;
+    
+    /* Use a clean, modern font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* Center everything vertically and horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Make the body take up the full height of the screen */
+    height: 100vh;
+    
+    /* Add some space around the edges */
+    padding: 20px;
+}
+
+/* 3. Style the CARD (the white box in the middle) */
+.card {
+    /* Dark semi-transparent background */
+    background: rgba(255, 255, 255, 0.08);
+    
+    /* Blurs the background behind the card (glass effect) */
+    backdrop-filter: blur(10px);
+    
+    /* Rounds the corners */
+    border-radius: 20px;
+    
+    /* Adds a subtle white border */
+    border: 1px solid rgba(231, 11, 11, 0.15);
+    
+    /* Adds space INSIDE the card */
+    padding: 40px;
+    
+    /* Limits how wide the card can get */
+    max-width: 500px;
+    
+    /* Centers the text inside */
+    text-align: center;
+    
+    /* Adds a soft shadow underneath */
+    box-shadow: 0 20px 40px rgba(211, 211, 196, 0.4);
+}
+
+/* 4. Style the MAIN HEADING (h1) */
+h1 {
+    font-size: 2.2rem; /* rem is a flexible size unit */
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* 5. Style the TAGLINE (the class we gave to the <p> tag) */
+.tagline {
+    font-size: 1.1rem;
+    color: #d1d1df; /* Light purple */
+    font-weight: 600; /* Makes it slightly bold */
+    margin-bottom: 20px;
+}
+
+/* 6. Style the HORIZONTAL LINE (hr) */
+hr {
+    border: 0; /* Remove the default ugly border */
+    height: 2px;
+    background: linear-gradient(to right, transparent, #b3b3ff, transparent);
+    margin: 20px 0;
+}
+
+/* 7. Style the BIO paragraph */
+.bio {
+    line-height: 1.7; /* Adds space between lines for readability */
+    margin-bottom: 25px;
+    color: #d4c4c4;
+}
+
+/* 8. Style the SUB-HEADING (h3) */
+h3 {
+    margin-bottom: 12px;
+    font-weight: 400; /* Normal weight, not bold */
+    letter-spacing: 1px;
+}
+
+/* 9. Style the UNORDERED LIST (ul) */
+ul {
+    list-style: none; /* Removes the default bullet points */
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+/* 10. Style each LIST ITEM (li) */
+li {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border-left: 4px solid #b3b3ff; /* Adds a purple bar on the left */
+    transition: all 0.3s ease; /* Smooth animation for hover effect */
+}
+
+/* 11. When you HOVER over a list item, it changes color */
+li:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px); /* Slides slightly to the right */
+}
+
+/* 12. Style the BUTTON */
+button {
+    background: #b3b3ff;
+    color: rgb(5, 63, 86);
+    border: none;
+    padding: 12px 90px;
+    border-radius: 50px; /* Fully rounded */
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: ha; /* Changes cursor to a hand */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(179, 179, 255, 0.3);
+}
+
+/* 13. When you HOVER over the button, it pops up */
+button:hover {
+    transform: scale(1.05); /* Grows slightly */
+    background: #cbcbff;
+    box-shadow: 0 8px 25px rgba(197, 122, 18, 0.5);
+}
+
+/* 14. When you CLICK the button, it shrinks momentarily */
+button:active {
+    transform: scale(1.95);
+}
+/* Add smooth transitions to everything */
+.card, body, h1, .tagline, .bio, li, hr, button {
+    transition: all 0.4s ease-in-out;
+}
+/* Add spacing between elements in the card */
+.card {
+    /* ... existing styles ... */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Consistent spacing between ALL children */
+}
+
+/* Override specific margins that might conflict */
+.card h1,
+.card .tagline,
+.card hr,
+.card .bio,
+.card h3,
+.card ul,
+.card button {
+    margin: 0; /* Remove individual margins, use gap instead */
+    width: 100%; /* Make all elements full width */
+    max-width: 400px; /* Keep readability */
+}
+
+/* Center the list items text */
+ul {
+    text-align: left; /* Keep list text left-aligned for readability */
+    padding-left: 20px;
+}
+
+/* But make list items look clean */
+li {
+    width: 100%;
+    box-sizing: border-box;
+}

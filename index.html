@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Developer Bio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        
+        <!-- ✅ FIXED: Added id="mainHeading" -->
+        <h1 id="mainHeading">👋 Hello, I'm [Your Name]</h1>
+        
+        <p class="tagline">Aspiring Full-Stack Developer</p>
+        
+        <hr>
+
+        <p class="bio">
+            I am currently learning Full-Stack Development. 
+            My goal is to build web applications that solve real-world problems. 
+            Today is Day 3 of my journey!
+        </p>
+
+        <!-- ✅ FIXED: This heading stays here -->
+        <h3>🚀 What I'm learning right now:</h3>
+        
+        <!-- ✅ FIXED: Added the container for skill counter -->
+        <div id="skillCounterContainer"></div>
+        
+        <!-- Skill list -->
+        <ul id="skillList"></ul>
+
+        <!-- Skill badges -->
+        <div id="skillBadgeContainer"></div>
+
+        <!-- Add Skill Form -->
+        <div style="margin: 20px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+            <h3>➕ Add a New Skill</h3>
+            <input type="text" id="newSkillInput" placeholder="Enter a skill..." 
+                   style="padding: 10px; border-radius: 8px; border: none; width: 60%; margin-right: 10px;">
+            <button id="addSkillBtn" 
+                    style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                Add Skill
+            </button>
+        </div>
+
+        <!-- Buttons -->
+        <button id="darkModeToggle" style="margin-bottom: 10px;">🌙 Toggle Dark Mode</button>
+        <button id="counterButton">Click Me!</button>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

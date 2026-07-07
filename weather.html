@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Day 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .weather-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-box button {
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background: #5a67d8;
+            transform: scale(1.05);
+        }
+
+        .search-box button:active {
+            transform: scale(0.95);
+        }
+
+        .weather-info {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .weather-info.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .city-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .temperature {
+            font-size: 64px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .weather-description {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .weather-icon {
+            font-size: 80px;
+            margin: 10px 0;
+        }
+
+        .weather-details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .weather-details div {
+            text-align: center;
+        }
+
+        .weather-details .label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .weather-details .value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: none;
+            padding: 20px;
+            color: #666;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .error {
+            display: none;
+            padding: 15px;
+            background: #fee;
+            color: #c0392b;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="weather-card">
+        <h1>🌤️ Weather App</h1>
+        <p class="subtitle">Enter a city to get real-time weather</p>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Enter city name..." value="London">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="loader"></div>
+            <p style="margin-top: 10px;">Fetching weather data...</p>
+        </div>
+
+        <!-- Error State -->
+        <div class="error" id="error">
+            <span id="errorMessage">City not found. Please try again.</span>
+        </div>
+
+        <!-- Weather Info -->
+        <div class="weather-info" id="weatherInfo">
+            <div class="weather-icon" id="weatherIcon">☀️</div>
+            <div class="city-name" id="cityName">London</div>
+            <div class="temperature" id="temperature">18°C</div>
+            <div class="weather-description" id="weatherDescription">Clear sky</div>
+            
+            <div class="weather-details">
+                <div>
+                    <div class="label">💧 Humidity</div>
+                    <div class="value" id="humidity">65%</div>
+                </div>
+                <div>
+                    <div class="label">💨 Wind</div>
+                    <div class="value" id="windSpeed">5 km/h</div>
+                </div>
+                <div>
+                    <div class="label">🌡️ Feels Like</div>
+                    <div class="value" id="feelsLike">18°C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">Data from OpenWeatherMap API</div>
+    </div>
+
+    <script src="weather.js"></script>
+</body>
+</html>
